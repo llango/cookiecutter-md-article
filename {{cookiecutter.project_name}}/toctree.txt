@@ -1,3 +1,2 @@
 src/ch01.md
-bib/bibliography.md
 
