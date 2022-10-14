@@ -1,4 +1,4 @@
-# Renders final PDF output file
+# 呈现最终的PDF输出文件
 
 
 LATEX_FORM_FILE=latex_formatter.yaml
@@ -17,19 +17,21 @@ pdf:
 	  --template     tex/template.tex 	\
 	  --pdf-engine   xelatex      		\
 	  --resource-path=.:fig			\
+	  --citeproc  \
 	  --bibliography bib/biblio.bib		\
+	  -M reference-section-title="参考文献"		\
 	  --highlight-style highlight.theme	\
 	  $(FILES)
 
 format:
 	@echo "格式化文件..."
 	latexindent cover.tex -s -o cover.tex -y="defaultIndent: '  '"
-	@echo "Deleting log file..."
+	@echo "删除日志文件..."
 	rm -f indent.log
-	@echo "Done!"
+	@echo "已完成!"
 
 clean:
 	@echo "删除输出文件..."
 	rm -rf $(OUT_DIR)
-	@echo "Done!"
+	@echo "已完成!"
 
