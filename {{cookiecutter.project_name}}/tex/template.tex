@@ -1,0 +1,129 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+% 定义文件字体、纸张大小和类型 %
+\documentclass[twoside,twocolumn]{article}
+
+% 自定义命令 %
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% 使用的包 %
+\usepackage{titling} % 自定义标题部分
+\usepackage{fontspec}
+\usepackage{eurosym}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{upquote}
+\usepackage{microtype}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+\usepackage[setpagesize=false,
+            unicode=false,
+            colorlinks=true,
+            urlcolor=blue,
+            linkcolor=black]{hyperref}
+
+\usepackage{microtype} % 为了美观，稍微调整一下字体间距
+
+{%- if cookiecutter.language == "chinese" -%}
+    \usepackage{xeCJK} % 语言连字符和排版规则
+{%- elif cookiecutter.language == "english" -%}
+	\usepackage[english]{babel} % 语言连字符和排版规则
+{% endif %}
+
+% 所有图形实用程序的路径 %
+\usepackage{graphicx}
+\graphicspath{
+	{fig/}
+}
+
+% 修复list错误
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% 数字数字，表格和方程式的章节 %
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+% 正确放置图形，类似于{figure}[h] %
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+% 语法高亮显示所需 %
+$highlighting-macros$
+
+% 不要让图片溢出页面 %
+% 仍然可以显式设置宽度/高度/选项的图像 %
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% 把链接做成脚注而不是热链接 %
+
+% 使用hyperref避免头文件中\sout的问题 %
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+
+% 没有段落缩进，并在段落之间设置空格 %
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % 防止过多的行
+
+% 启用引用和参考
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+$endif$
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % 文档margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % 自定义标题下面/上面浮动在表格或数字
+\usepackage{booktabs} % 表中的水平规则
+
+\usepackage{lettrine} % 字母是文本开头第一个放大的字母
+
+\usepackage{enumitem} % 自定义列表
+\setlist[itemize]{noitemsep} % 使列表标签更紧凑
+
+\usepackage{abstract} % 关键字定制
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % 将“关键字”文本设置为粗体
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % 将摘要本身设置为小斜体文本
+
+\usepackage{titlesec} % 允许自定义标题
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % 更改部分标题的外观
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % 
+
+\usepackage{fancyhdr} % 页眉和页脚
+\pagestyle{fancy} % 所有页面都有页眉和页脚
+\fancyhead{} % 清空默认标头
+\fancyfoot{} % 清空默认页脚
+\fancyhead[C]{Custom header} % 自定义标题文本
+\fancyfoot[RO,LE]{\thepage} % 自定义页脚文本
+
+\input{tex/title.tex}
+
+
+%--- 文档定义在这一行下面 ---%
+\begin{document}
+\maketitle
+
+% 通过更改编号来控制文档内容深度: 0="chapter", 1="section" %
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% 添加其余的内容源文件 %
+$body$
+
+\end{document}

@@ -1,0 +1,9 @@
+{
+    "project_name": "article",
+    "title_article": "文章标题",
+    "author_name": "作者",
+    "author_role": "作者角色或机构",
+    "author_email": "作者邮箱",
+    "date_article": "DD/MM/YYYY",
+    "language": ["english", "chinese"]
+}
